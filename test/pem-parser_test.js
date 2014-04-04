@@ -1,18 +1,27 @@
+/* global describe, it, before */
+
 var expect = require('chai').expect,
     mocks = require('mocks'),
     proxyquire = require('proxyquire');
 
+function certify(certStr, trim) {
+  return '-----BEGIN CERTIFICATE-----\n' + certStr.trim() + '\n-----END CERTIFICATE-----' + (trim ? '' : '\n');
+}
+
 describe('pem-parser', function() {
-  var certify = function(certStr, trim) {
-    return '-----BEGIN CERTIFICATE-----\n' + certStr.trim() + '\n-----END CERTIFICATE-----' + (trim ? '' : '\n');
-  };
-  it ('parses certificates from a file', function() {
+  var PEMParser;
+
+  before(function() {
     var mockFS = mocks.fs.create({
       'ca_cert': mocks.fs.file(0, certify('abcd'))
     });
+
     PEMParser = proxyquire('..', {
       'fs': mockFS
     });
+  });
+
+  it ('parses certificates from a file', function() {
     expect(PEMParser.loadCACertsFromFile('ca_cert')).to.be.eql([certify('abcd', true)]);
   });
   it ('parses two certificates', function() {
