@@ -1,8 +1,8 @@
 pem-parser
 ==========
-Breaks apart CA Certificate files that contain multiple PEMs into an array of PEMs. This is useful when you are passing CA Cert files into tls. For example, this:
+Breaks apart CA Certificate files that contain multiple PEMs into an array of PEMs. This is useful when you are passing CA Certificate files which contains multiple PEMs into tls.connect.
 
-The [TLS documentation](http://nodejs.org/api/tls.html#tls_tls_connect_port_host_options_callback) indicates that the ca options can be either a string containing a single PEM or an array of strings, each containing its own PEM.
+The [TLS documentation](http://nodejs.org/api/tls.html#tls_tls_connect_port_host_options_callback) indicates that the ca option can be either a string containing a single PEM or an array of strings, each containing its own PEM.
 
 ## Install
 
@@ -14,13 +14,18 @@ $ npm install pem-parser
 
 ```js
 var PEMParser = require('pem-parser');
+var caCerts = PEMParser.loadCACertsFromFile(caCertFile); // caCertFile can contain multiple PEMs.
 var socket = require('tls').connect(this.port, this.host, {
   key:  fs.readFileSync(keyFile),
   cert: fs.readFileSync(certFile),
-  ca: PEMParser.loadCACertsFromFile(caCertFile) # caCertFile contains multiple PEMs.
+  ca: caCerts
 }, function(){
   console.log('Connected!');
 });
+
+// or alternatively, you can do:
+var fileContents = fs.readFileSync(caCertFile).toString();
+var caCerts = PEMParser.loadCACerts(fileContents);
 ```
 
 ### Setup
