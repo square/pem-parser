@@ -11,7 +11,7 @@
     "url": "git@github.com:square/pem-parser.git"
   },
   "scripts": {
-    "test": "mocha --recursive -R spec test",
+    "test": "npm run lint && mocha --recursive -R spec test",
     "lint": "jshint index.js test"
   },
   "dependencies": {
