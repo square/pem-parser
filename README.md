@@ -14,7 +14,7 @@ $ npm install pem-parser
 
 ```js
 var PEMParser = require('pem-parser');
-var caCerts = PEMParser.loadCACertsFromFile(caCertFilename); // caCertFile can contain multiple PEMs.
+var caCerts = PEMParser.loadCACertsFromFile(caCertFilename); // caCertFilename can contain multiple PEMs.
 var socket = require('tls').connect(this.port, this.host, {
   key:  fs.readFileSync(keyFile),
   cert: fs.readFileSync(certFile),
