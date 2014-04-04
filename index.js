@@ -1,22 +1,17 @@
 var fs = require('fs');
 
 function loadCACertsFromFile(caCertFilename) {
-  var caCertFileContents = fs.readFileSync(caCertFilename).toString('utf8');
+  var caCertFileContents = fs.readFileSync(caCertFilename).toString();
   return PEMParser.loadCACerts(caCertFileContents);
-};
+}
 
 function loadCACerts(caCertFileContents) {
-  var caCerts = [],
-      endStr = '-----END CERTIFICATE-----',
-      parts = caCertFileContents.split(endStr);
-  for (var i=0; i<parts.length-1; i++) {
-    var cert = parts[i];
-    cert += endStr;
-    cert = cert.trim();
-    caCerts.push(cert);
-  }
-  return caCerts;
-};
+  var END_CERT = '-----END CERTIFICATE-----';
+      sections = caCertFileContents.split(END_CERT).slice(0, -1);
+  return sections.map(function(section) {
+    return (section + END_CERT).trim();
+  });
+}
 
-module.exports.loadCACerts = loadCACerts;
-module.exports.loadCACertsFromFile = loadCACertsFromFile;
+exports.loadCACerts = loadCACerts;
+exports.loadCACertsFromFile = loadCACertsFromFile;

@@ -3,12 +3,9 @@ var expect = require('chai').expect,
     proxyquire = require('proxyquire');
 
 describe('pem-parser', function() {
-  var certify;
-  before(function() {
-    certify = function(certStr, trim) {
-      return '-----BEGIN CERTIFICATE-----\n' + certStr.trim() + '\n-----END CERTIFICATE-----' + (trim ? '' : '\n');
-    };
-  });
+  var certify = function(certStr, trim) {
+    return '-----BEGIN CERTIFICATE-----\n' + certStr.trim() + '\n-----END CERTIFICATE-----' + (trim ? '' : '\n');
+  };
   it ('parses certificates from a file', function() {
     var mockFS = mocks.fs.create({
       'ca_cert': mocks.fs.file(0, certify('abcd'))

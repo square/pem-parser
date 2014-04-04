@@ -11,11 +11,13 @@
     "url": "git@github.com:square/pem-parser.git"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --recursive -R spec test"
+    "test": "./node_modules/mocha/bin/mocha --recursive -R spec test",
+    "lint": "./node_modules/jshint/bin/jshint index.js test"
   },
   "dependencies": {
   },
   "devDependencies": {
+    "jshint": "~2.5.0",
     "chai": "~1.9.1",
     "mocks": "0.0.15",
     "proxyquire": "~0.6.0",
