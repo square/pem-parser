@@ -1,0 +1,26 @@
+{
+  "name": "pem-parser",
+  "version": "0.0.1",
+  "description": "SSL CA Cert file parsing library.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:square/pem-parser.git"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --recursive -R spec test"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "~1.9.1",
+    "mocks": "0.0.15",
+    "proxyquire": "~0.6.0",
+    "mocha": "~1.18.2"
+  },
+  "author": "Square, Inc.",
+  "license": "Apache 2"
+}
