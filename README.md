@@ -14,7 +14,7 @@ $ npm install pem-parser
 
 ```js
 var PEMParser = require('pem-parser');
-var caCerts = PEMParser.loadCACertsFromFile(caCertFile); // caCertFile can contain multiple PEMs.
+var caCerts = PEMParser.loadCACertsFromFile(caCertFilename); // caCertFile can contain multiple PEMs.
 var socket = require('tls').connect(this.port, this.host, {
   key:  fs.readFileSync(keyFile),
   cert: fs.readFileSync(certFile),
@@ -24,7 +24,7 @@ var socket = require('tls').connect(this.port, this.host, {
 });
 
 // or alternatively, you can do:
-var fileContents = fs.readFileSync(caCertFile).toString();
+var fileContents = fs.readFileSync(caCertFilename).toString();
 var caCerts = PEMParser.loadCACerts(fileContents);
 ```
 
@@ -47,8 +47,10 @@ $ npm test
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+4. Make sure the tests pass by calling `npm test`.
+5. Make sure the linter passes by calling `npm run-script lint`.
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create new Pull Request
 
 Any contributors to the master pem-parser repository must sign the [Individual
 Contributor License Agreement (CLA)][cla].  It's a short form that covers our
